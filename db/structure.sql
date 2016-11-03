@@ -185,6 +185,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: tweets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE tweets (
+    id integer NOT NULL,
+    body text,
+    user_id integer,
+    image_id character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: tweets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tweets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tweets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tweets_id_seq OWNED BY tweets.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -193,10 +226,11 @@ CREATE TABLE users (
     firstname character varying,
     lastname character varying,
     username character varying,
-    password character varying,
-    avatar character varying,
+    password_digest character varying,
+    avatar_id character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    api_token character varying
 );
 
 
@@ -245,6 +279,13 @@ ALTER TABLE ONLY mentions ALTER COLUMN id SET DEFAULT nextval('mentions_id_seq':
 --
 
 ALTER TABLE ONLY refile_attachments ALTER COLUMN id SET DEFAULT nextval('refile_attachments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tweets ALTER COLUMN id SET DEFAULT nextval('tweets_id_seq'::regclass);
 
 
 --
@@ -300,6 +341,14 @@ ALTER TABLE ONLY refile_attachments
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: tweets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tweets
+    ADD CONSTRAINT tweets_pkey PRIMARY KEY (id);
 
 
 --
@@ -367,11 +416,33 @@ CREATE INDEX index_refile_attachments_on_oid ON refile_attachments USING btree (
 
 
 --
+-- Name: index_tweets_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tweets_on_user_id ON tweets USING btree (user_id);
+
+
+--
+-- Name: index_users_on_api_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_api_token ON users USING btree (api_token);
+
+
+--
+-- Name: fk_rails_003928b7f5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tweets
+    ADD CONSTRAINT fk_rails_003928b7f5 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20161103184209'), ('20161103185953'), ('20161103185954'), ('20161103185955'), ('20161103193106');
+INSERT INTO schema_migrations (version) VALUES ('20161103184209'), ('20161103185953'), ('20161103185954'), ('20161103185955'), ('20161103193106'), ('20161103201922'), ('20161103202218'), ('20161103205302'), ('20161103205928');
 
 
