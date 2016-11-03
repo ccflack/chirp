@@ -20,6 +20,11 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
+gem 'socialization'
+gem 'sinatra', github: 'sinatra/sinatra'
+gem "refile", require: "refile/rails", github: 'refile/refile'
+gem "refile-mini_magick"
+gem 'refile-postgres', '~> 1.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
