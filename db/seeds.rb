@@ -31,7 +31,7 @@ User.create(
   username: "briangm",
   password: "kansasj12",
   firstname: "Brian",
-  lastname: "McMillian"
+  lastname: "McMillan"
 )
 
 User.create(

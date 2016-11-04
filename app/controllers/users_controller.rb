@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   end
 
   def all_followers
-    @followers = User.find(params[:username]).followers(User)
+    @followers = User.find(params[:id]).followers(User)
     render json: @followers, except: :api_token
   end
 
