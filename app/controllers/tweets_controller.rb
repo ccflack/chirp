@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-  before_action :require_user, only: [:create, :index]
+  # before_action :require_user, only: [:create, :index]
 
 
   def index

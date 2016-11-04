@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_user, only: [:follow_unfollow]
+  # before_action :require_user, only: [:follow_unfollow]
 
   def index
     @users = User.all
