@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_user, only: [:follow_unfollow]
 
   def index
-    @users = current_user.timeline
+    @users = User.all
     render json: @users, except: :api_token
   end
 

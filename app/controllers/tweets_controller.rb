@@ -4,8 +4,16 @@ class TweetsController < ApplicationController
 
 
   def index
-    @tweets = Tweet.all
+    if current_user
+      @tweets = Tweet.timeline(current_user)
+    else
+      @tweets = Tweet.all
+    end
     render json: @tweets
+  end
+
+  def show
+    render json: @tweet
   end
 
   def create

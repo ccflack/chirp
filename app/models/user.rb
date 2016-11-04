@@ -7,7 +7,6 @@ class User < ApplicationRecord
   acts_as_follower
 
 
-
   validates :username,
             presence: true,
             uniqueness:true
