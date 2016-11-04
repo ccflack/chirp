@@ -230,7 +230,8 @@ CREATE TABLE users (
     avatar_id character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    api_token character varying
+    api_token character varying,
+    followees_count integer DEFAULT 0
 );
 
 
@@ -443,6 +444,6 @@ ALTER TABLE ONLY tweets
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20161103184209'), ('20161103185953'), ('20161103185954'), ('20161103185955'), ('20161103193106'), ('20161103201922'), ('20161103202218'), ('20161103205302'), ('20161103205928');
+INSERT INTO schema_migrations (version) VALUES ('20161103184209'), ('20161103185953'), ('20161103185954'), ('20161103185955'), ('20161103193106'), ('20161103201922'), ('20161103202218'), ('20161103205302'), ('20161103205928'), ('20161104181604');
 
 

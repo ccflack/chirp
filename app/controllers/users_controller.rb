@@ -1,9 +1,25 @@
 class UsersController < ApplicationController
 
+  before_action :require_user, only: [:follow_unfollow]
+
+  def index
+    @users = current_user.timeline
+    render json: @users, except: :api_token
+  end
+
+  def show
+    @user = User.find_by(username: params[:username])
+    if @user
+      render json: @user,  except: :api_token
+    else
+      render json: ["User not found."], status: :bad_request
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
-     render json: @user
+     render json: @user,  except: :api_token
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
     end
@@ -18,12 +34,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-
+  def follow_unfollow
+    current_user.toggle_follow!(User.find (params[:id]))
+    render json: current_user
   end
 
-  def show
-
+  def all_followers
+    @followers = User.find(params[:username]).followers(User)
+    render json: @followers, except: :api_token
   end
 
   def delete
