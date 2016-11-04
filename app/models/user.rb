@@ -11,6 +11,14 @@ class User < ApplicationRecord
             presence: true,
             uniqueness:true
 
+  def following
+    if current_user
+      object.followed_by?(current_user)
+    else
+      false
+    end
+  end
+
 
   validates_presence_of :firstname, :username, :password
 end
