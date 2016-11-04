@@ -7,6 +7,15 @@ class UsersController < ApplicationController
     render json: @users, except: :api_token
   end
 
+  def self
+    @user = User.find_by(api_token: params[:api_token])
+    if @user
+      render json: @user, except: :api_token
+    else
+      render json: @user.errors.full_messages
+    end
+  end
+
   def show
     @user = User.find_by(username: params[:username])
     if @user
@@ -36,7 +45,7 @@ class UsersController < ApplicationController
 
   def follow_unfollow
     current_user.toggle_follow!(User.find (params[:id]))
-    render json: current_user
+    render json: current_user, except: :api_token
   end
 
   def all_followers

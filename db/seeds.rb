@@ -19,7 +19,7 @@ end
 
 50.times do
   @users.sample.tweets << Tweet.create(
-  body: Faker::Lorem.sentence,
+  body: Faker::Hacker.say_something_smart
 )
 end
 
