@@ -1,14 +1,14 @@
 class TweetsController < ApplicationController
 
-  before_filter :require_user, only: [:create, :index]
+  before_action :require_user, only: [:create, :index]
 
 
   def index
-    if current_user
-      @tweets = Tweet.timeline(current_user)
-    else
+    # if current_user
+    #   @tweets = Tweet.timeline(current_user)
+    # else
       @tweets = Tweet.all
-    end
+    # end
     render json: @tweets
   end
 
@@ -25,7 +25,6 @@ class TweetsController < ApplicationController
       render json: @tweet.errors.full_messages
     end
   end
-
 
 
   private

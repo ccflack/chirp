@@ -25,7 +25,7 @@ gem 'sinatra', github: 'sinatra/sinatra'
 gem "refile", require: "refile/rails", github: 'refile/refile'
 gem "refile-mini_magick"
 gem 'refile-postgres', '~> 1.4'
-
+gem 'kaminari'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
