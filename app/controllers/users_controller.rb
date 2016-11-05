@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def followed
-    @followees = User.find(api_token: params[:api_token]).followees(User)
+    @followees = User.find_by(api_token: params[:api_token]).followees(User)
     render json: @followees, except: :api_token
   end
 
