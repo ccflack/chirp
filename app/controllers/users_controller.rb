@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     render json: @followers, except: :api_token
   end
 
+  def followed
+    @followees = User.find(params[:id]).followees(User)
+    render json: @followees, except: :api_token
+  end
+
   def delete
 
   end
