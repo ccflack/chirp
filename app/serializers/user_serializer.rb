@@ -1,5 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :api_token, :firstname, :lastname, :username, :avatar, :id, :followers_count, :followees_count
+  
   has_many :tweets
 
 
