@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 
   def followed
     if current_user
-      @followed = current_user.followees(User)
-      render json: @followed
+      @users = current_user.followees(User)
+      render json: @users
     else
       render json: @users.errors.full_messages
     end
