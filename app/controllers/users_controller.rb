@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       @users -= current_user.followees(User)
       render json: @users
     else
-      render json: @uses.errors.full_messages
+      render json: @users.errors.full_messages
     end
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       @followed = current_user.followees(User)
       render json: @followed
     else
-      render json: @uses.errors.full_messages
+      render json: @users.errors.full_messages
     end
   end
 
