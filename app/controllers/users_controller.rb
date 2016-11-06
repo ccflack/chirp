@@ -72,11 +72,6 @@ class UsersController < ApplicationController
     render json: @followers, except: :api_token
   end
 
-  def followed
-    @followees = User.find_by(api_token: params[:api_token]).followees(User)
-    render json: @followees, except: :api_token
-  end
-
   private
 
   def user_params
